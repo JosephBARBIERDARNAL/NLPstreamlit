@@ -1,26 +1,19 @@
-
-import PyPDF2 #deal with pdf
-
-#NATURAL LANGUAGE ToolKit
 import nltk
 from matplotlib import pyplot as plt
 from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize #tokenizing
-import re #regular expression
-#OTHERS
-from collections import Counter #word occurence counting
-import streamlit as st #web app development
-# OTHERS
-from collections import Counter  # word occurence counting
-
-import PyPDF2  # deal with pdf
-import streamlit as st  # web app development
-# NATURAL LANGUAGE ToolKit
-from nltk.tokenize import word_tokenize  # tokenizing
+from nltk.tokenize import word_tokenize
+import re
+from collections import Counter
+import streamlit as st
 from wordcloud import WordCloud
 
 
-def plot_top_n_words(cleaned_text, n, figsize=(12,6)):
+
+
+
+
+
+def plot_top_n_words(cleaned_text, n, figsize=(12,6), color="red"):
     """
     Based on a dictionnary full of word occurence, this function (bar-)plots the top `n` words
     """
@@ -37,7 +30,7 @@ def plot_top_n_words(cleaned_text, n, figsize=(12,6)):
     fig, ax = plt.subplots(figsize=figsize)
 
     # Plot the data
-    ax.bar(words, counts, color='red')
+    ax.bar(words, counts, color=color)
 
     # Set x-axis label properties
     ax.set_xticklabels(words, rotation=45, ha='right')
@@ -89,7 +82,11 @@ def word_cloud_plot(cleaned_text, n):
     
     
     
-    
+
+
+
+
+
     
 nltk.download('stopwords')
 nltk.download('punkt')
