@@ -92,6 +92,7 @@ def word_cloud_plot(cleaned_text, n):
     
     
 nltk.download('stopwords')
+nltk.download('punkt')
 st.cache_data()
 def clean_text(text, language="french", words_to_remove=[]):
     """
