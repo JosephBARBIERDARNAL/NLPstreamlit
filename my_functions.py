@@ -41,29 +41,32 @@ def open_file(file_name):
 
 
 
-def clean_text(text, language="french", words_to_remove=[]):
+def clean_text(text, language="french", words_to_remove=[], remove_punctuation=True, remove_url=True, remove_numbers=True, remove_small_words=True):
 
     # download stopwords if not already done
     nltk.download('stopwords')
     nltk.download('punkt')
 
-    text = re.sub(r'[^\w\s]', ' ', text)
-    text = re.sub(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', text) # remove url links
-    text = re.sub(r'\s+', ' ', text) # replace multiple spaces with a single space
-    text = re.sub(r'\d+', '', text) # remove numbers from the text
+    text = re.sub(r'\s+', ' ', text)  # replace multiple spaces with a single space
 
-    # keep only words with 3 or more letters
-    text = re.findall(r'\b\w{3,}\b', text)
-    text = " ".join(text)
+    if remove_punctuation:
+        text = re.sub(r'[^\w\s]', ' ', text) # remove punctuation
 
-    # remove pre-defined (from NLTK) + others french stopwords
+    if remove_url:
+        text = re.sub(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', text) # remove url links
+
+    if remove_numbers:
+        text = re.sub(r'\d+', '', text) # remove numbers from the text
+
+    if remove_small_words:
+        text = re.sub(r'\b\w{1,2}\b', '', text) # remove words with 2 or less letters
+
+    # remove pre-defined (from NLTK) + others user-defined stopwords
     stop_words = set(stopwords.words(language))
-    other_stop_words = {"https", "http", "www", "com", "car"}
-    stop_words.update(other_stop_words)
     stop_words.update(words_to_remove)
     words = nltk.word_tokenize(text)
     words = [word for word in words if word not in stop_words]
-    text = ' '.join(words)
+    text = " ".join(words)
 
     # return the cleaned text
     return text
@@ -90,18 +93,29 @@ def word_cloud_plot(cleaned_text, n):
     ax.axis("off")
     st.pyplot(fig)
 
+    #download wordcloud
+    name = "wordcloud.png"
+    plt.savefig(name)
+    with open(name, "rb") as img:
+        btn = st.download_button(
+            label="Download image",
+            data=img,
+            file_name=name,
+            mime="image/png")
 
 
 
 
-def plot_top_n_words(cleaned_text, n, figsize=(12, 6), color="red"):
+
+
+
+def plot_top_n_words(cleaned_text, n, file_name, color, figsize=(12, 6)):
     st.text("")  # add a space
 
     tokenized_text = word_tokenize(cleaned_text)  # tokenize the text
     word_occurrences_dict = Counter(tokenized_text)  # count word occurence
 
-    top_n_words = sorted(word_occurrences_dict.items(), key=lambda x: x[1], reverse=True)[
-                  :n]  # select the n most frequent
+    top_n_words = sorted(word_occurrences_dict.items(), key=lambda x: x[1], reverse=True)[:n]  # select the n most frequent
     words = [word for word, count in top_n_words]  # get the words
     counts = [count for word, count in top_n_words]  # get the counts
     n = len(words)  # get the number of words
@@ -112,8 +126,18 @@ def plot_top_n_words(cleaned_text, n, figsize=(12, 6), color="red"):
     ax.set_xticklabels(words, rotation=45, ha='right')
     ax.set_xlabel('Words')
     ax.set_ylabel('Occurrences', rotation=40)
-    ax.set_title(f"Top {n} of most frequent words")
+    ax.set_title(f"Top {n} of most frequent words of {file_name}")
     st.pyplot(fig)
+
+    # download barplot
+    name = "barplot.png"
+    plt.savefig(name)
+    with open(name, "rb") as img:
+        btn = st.download_button(
+            label="Download image",
+            data=img,
+            file_name=name,
+            mime="image/png")
 
 
 
@@ -121,11 +145,6 @@ def plot_top_n_words(cleaned_text, n, figsize=(12, 6), color="red"):
 
 
 def sentiment_analysis(text):
-    """
-    Input: a text
-    Apply: apply the sentiment analysis on the text
-    Output: the sentiment analysis score
-    """
     blob = TextBlob(text) #apply the sentiment analysis
     st.text("") #add an empty text (make 1 space)
     st.markdown(f"- Polarity score: {round(blob.sentiment.polarity,3)}") #display the polarity score

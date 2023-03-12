@@ -9,7 +9,6 @@ st.markdown("### About the app")
 st.markdown("***This app was created in order to simplify text manipulation and analysis. There are multiple features:***")
 st.markdown("- Sentiment analysis")
 st.markdown("- Wordcloud/frequency")
-st.markdown("- Word search")
 
 #LIBRARIES
 st.text("")

@@ -21,3 +21,7 @@ st.markdown("- Polarity is a float within the range [-1, 1]. A score of 0 is neu
 st.markdown("- Subjectivity is a float within the range [0, 1] where 0 is very objective and 1 is very subjective.")
 st.markdown("- They are calculated thanks to the [TextBlob library](https://textblob.readthedocs.io/en/dev/quickstart.html).")
 
+#INFORMATION
+st.text("")
+st.markdown("### About file type")
+st.markdown("This app supports the following file types: .txt, .csv, .xlsx, .json, .html, .xml, .pdf, .docx")
