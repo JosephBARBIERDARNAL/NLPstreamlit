@@ -9,7 +9,7 @@ file_name = st.file_uploader("")
 page_text = "Hello world"
 if file_name is not None:
     page_text = open_file(file_name)
-
+st.text("")
 #SENTIMENT ANALYSIS
 if page_text != "Hello world":
     sentiment_analysis(page_text)
