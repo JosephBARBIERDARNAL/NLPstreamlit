@@ -1,19 +1,4 @@
-import nltk
-from matplotlib import pyplot as plt
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-import re
-from collections import Counter
-import streamlit as st
-from wordcloud import WordCloud
-
-
-
-
-
-
-
-def plot_top_n_words(cleaned_text, n, figsize=(12,6), color="red"):
+def plot_top_n_words(cleaned_text, n, figsize=(12,6)):
     """
     Based on a dictionnary full of word occurence, this function (bar-)plots the top `n` words
     """
@@ -30,7 +15,7 @@ def plot_top_n_words(cleaned_text, n, figsize=(12,6), color="red"):
     fig, ax = plt.subplots(figsize=figsize)
 
     # Plot the data
-    ax.bar(words, counts, color=color)
+    ax.bar(words, counts, color='red')
 
     # Set x-axis label properties
     ax.set_xticklabels(words, rotation=45, ha='right')
@@ -51,13 +36,7 @@ def plot_top_n_words(cleaned_text, n, figsize=(12,6), color="red"):
     
     
     
-    
-    
-    
-    
-    
-    
-
+st.cache_data()
 def word_cloud_plot(cleaned_text, n):
     
     #tokenize the text
@@ -82,14 +61,9 @@ def word_cloud_plot(cleaned_text, n):
     
     
     
-
-
-
-
-
+    
     
 nltk.download('stopwords')
-nltk.download('punkt')
 st.cache_data()
 def clean_text(text, language="french", words_to_remove=[]):
     """

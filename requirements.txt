@@ -4,3 +4,5 @@ pypdf2~=3.0.1
 nltk~=3.8.1
 matplotlib~=3.7.1
 wordcloud~=1.8.2.2
+textblob~=0.17.1
+docx2txt~=0.8

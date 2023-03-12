@@ -8,7 +8,7 @@ from ipynb.fs.full.main import *
 from ipynb.fs.full.text_analysis import *
 from ipynb.fs.full.get_all_pdf_name import *
 
-from functions import plot_top_n_words, word_cloud_plot, space, clean_text
+from my_functions import plot_top_n_words, word_cloud_plot, space, clean_text
 
 ############################################
 # TITLE    START
