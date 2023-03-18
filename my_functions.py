@@ -40,12 +40,12 @@ def open_file(file_name):
         return "FILE TYPE NOT SUPPORTED"
 
 
-
+nltk.download('stopwords')
+nltk.download('punkt')
 def clean_text(text, language="french", words_to_remove=[], remove_punctuation=True, remove_url=True, remove_numbers=True, remove_small_words=True):
 
     # download stopwords if not already done
-    nltk.download('stopwords')
-    nltk.download('punkt')
+
 
     text = re.sub(r'\s+', ' ', text)  # replace multiple spaces with a single space
 
@@ -76,7 +76,7 @@ def clean_text(text, language="french", words_to_remove=[], remove_punctuation=T
     
     
     
-    
+
 def word_cloud_plot(cleaned_text, n):
 
     st.text("") # add a space
@@ -143,7 +143,7 @@ def plot_top_n_words(cleaned_text, n, file_name, color, figsize=(12, 6)):
 
 
 
-
+@st.cache_data()
 def sentiment_analysis(text):
     blob = TextBlob(text) #apply the sentiment analysis
     st.text("") #add an empty text (make 1 space)

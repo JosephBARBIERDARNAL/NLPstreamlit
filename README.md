@@ -1,5 +1,7 @@
 # Natural language processing app
 
+You can try the app [here](https://josephbarbierdarnal-nlpstreamlit-streamlit-app-5f719o.streamlit.app).
+
 This is a simple NLP app built with streamlit. It performs (for the moment) the following tasks:
 
 - Sentiment Analysis
