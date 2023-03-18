@@ -7,9 +7,6 @@ from collections import Counter
 st.title("Wordcloud")
 st.text("")
 
-#SIDEBAR
-st.sidebar.text("")
-
 #CUSTOMIZATION
 st.sidebar.markdown("## Settings")
 st.sidebar.text("")

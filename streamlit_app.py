@@ -17,8 +17,8 @@ st.markdown("You can find the source code on this [Github](https://github.com/Jo
 
 #ABOUT AUTHOR
 st.text("")
-st.markdown("### About the author")
-st.markdown("This app was created by [Joseph Barbier](https://www.linkedin.com/in/joseph-barbier-darnal-4ab531224/).")
+#st.markdown("### About the author")
+#st.markdown("This app was created by [Joseph Barbier](https://www.linkedin.com/in/joseph-barbier-darnal-4ab531224/).")
 
 
 
