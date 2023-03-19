@@ -1,5 +1,4 @@
 import streamlit as st
-import docx2txt
 import PyPDF2
 import re
 import nltk
@@ -138,7 +137,7 @@ def sentiment_analysis(text):
 
 
 @st.cache_data()
-def regex(pattern, string):
+def regular_expression(pattern, string):
     """
     Input: a pattern and a string
     Output: a list of all the matches

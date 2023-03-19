@@ -1,6 +1,6 @@
 import streamlit as st
 import re
-from my_functions import open_file, regex, clean_text
+from my_functions import open_file, regular_expression, clean_text
 
 #TITLE
 st.title("Regular expressions")
@@ -49,7 +49,7 @@ st.markdown("### Write the regex you want to test")
 user_regex = st.text_area("Here comes your regex (example: '\d+' matchs any number)", height=20, max_chars=100)
 if (user_regex and len(user_text) > 1):
     st.success("Regex saved")
-    regex(user_regex, user_text)
+    regular_expression(user_regex, user_text)
 
 #HELP SECTION
 st.text("")
