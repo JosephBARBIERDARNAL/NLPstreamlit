@@ -8,24 +8,24 @@ st.title("Wordcloud")
 st.text("")
 
 #CUSTOMIZATION
-st.sidebar.markdown("## Settings")
+st.sidebar.markdown("## Options")
 st.sidebar.text("")
-remove_punctuation = st.sidebar.checkbox("Remove the punctuation?", value=True)
-remove_url = st.sidebar.checkbox("Remove the urls?", value=True)
-remove_numbers = st.sidebar.checkbox("Remove the numbers?", value=True)
-remove_small_words = st.sidebar.checkbox("Remove the small words? (1 or 2 letters)", value=True)
+remove_small_words = st.sidebar.checkbox("Remove words with less than 3 characters", value=True)
+remove_punctuation = st.sidebar.checkbox("Remove the punctuation", value=True)
+remove_url = st.sidebar.checkbox("Remove the urls", value=True)
+remove_numbers = st.sidebar.checkbox("Remove the numbers", value=True)
 st.sidebar.text("")
-language = st.sidebar.selectbox("Choose the language of your text", ["french", "english", "spanish"])
+language = st.sidebar.selectbox("Select the language of your text", ["french", "english", "spanish"])
 st.sidebar.text("")
 number_of_word = st.sidebar.slider("Number of words you want to plot", 5, 100)
 st.sidebar.text("")
-color = st.sidebar.color_picker("Color to use for the barplot", '#00f900')
+color = st.sidebar.color_picker("Color to use for the barplot", "#E2070A")
 st.sidebar.text("")
 
 
 
 #OPEN FILE
-file_name = st.file_uploader("")
+file_name = st.file_uploader("", type=["pdf"])
 page_text = "Hello world"
 if file_name is not None:
     page_text = open_file(file_name)
@@ -61,11 +61,28 @@ if page_text != "Hello world":
     else:
         plot_top_n_words(cleaned_text, number_of_word, color=color, file_name="Hello world")
 
-#INFORMATION
+
+
+
+
+
+
 st.text("")
-st.markdown("### About file type")
-st.markdown("This app supports the following file types: .txt, .csv, .xlsx, .json, .html, .xml, .pdf, .docx")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
 
-
-
-
+# Contact
+st.markdown("###### Contact")
+st.markdown("If you have any questions/suggestions/bug to report, you can contact me via my email: joseph.barbierdarnal@gmail.com")

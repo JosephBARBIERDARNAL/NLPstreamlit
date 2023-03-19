@@ -12,7 +12,7 @@ from textblob import TextBlob
 
 
 
-
+@st.cache_data()
 def open_file(file_name):
 
     #open pdf file
@@ -24,24 +24,14 @@ def open_file(file_name):
             page_text += page.extract_text().lower()
         return page_text
 
-    #open docx file
-    elif file_name.name.endswith(".docx"):
-        docx_text = docx2txt.process(file_name)
-        return docx_text
-
-    #open simple file
-    elif file_name.name.endswith((".txt", ".csv", ".xlsx", ".json", ".html", ".xml")):
-        with open(file_name, "r") as f:
-            text = f.read()
-        return text
-
     else:
-        st.write("File type not supported. Try converting to PDF.")
-        return "FILE TYPE NOT SUPPORTED"
+        st.error("File type not supported. Try converting to PDF.")
+        return ""
 
 
 nltk.download('stopwords')
 nltk.download('punkt')
+@st.cache_data()
 def clean_text(text, language="french", words_to_remove=[], remove_punctuation=True, remove_url=True, remove_numbers=True, remove_small_words=True):
 
     # download stopwords if not already done
@@ -71,10 +61,6 @@ def clean_text(text, language="french", words_to_remove=[], remove_punctuation=T
     # return the cleaned text
     return text
 
-    
-    
-    
-    
     
 
 def word_cloud_plot(cleaned_text, n):
@@ -151,9 +137,21 @@ def sentiment_analysis(text):
     st.markdown(f"- Subjectivity score: {round(blob.sentiment.subjectivity,3)}") #display the subjectivity score
 
 
-
-
-
+@st.cache_data()
+def regex(pattern, string):
+    """
+    Input: a pattern and a string
+    Output: a list of all the matches
+    """
+    # find all matches
+    pattern = re.compile(pattern)
+    match = re.findall(pattern, string)
+    if match:
+        st.write(f"Number of matchs: {len(match)}")
+        for i in match:
+            st.write(i)
+    else:
+        st.error("No match found")
     
 
 

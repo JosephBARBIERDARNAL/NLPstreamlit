@@ -6,11 +6,12 @@ This is a simple NLP app built with streamlit. It performs (for the moment) the 
 
 - Sentiment Analysis
 - Wordcloud Generation 
+- Regex Search
 
 ## How the app works?
 
-- You upload a file of your choice (most file types are supported).
 - You select the task you want to perform.
+- You upload a PDF file of your choice (or write a text).
 - You select the parameters for the task.
 - You get the results.
 
