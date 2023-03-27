@@ -1,5 +1,4 @@
 import streamlit as st
-import re
 from my_functions import open_file, regular_expression, clean_text
 
 #TITLE
@@ -23,7 +22,7 @@ st.text("")
 file_name = None
 if not write_text:
     st.markdown("### Upload a text")
-    file_name = st.file_uploader("Only PDF files are accepted for the moment", type="pdf")
+    file_name = st.file_uploader("Only PDF files are accepted", type="pdf")
 user_text = "Hello world"
 if file_name is not None:
     user_text = open_file(file_name)
@@ -34,6 +33,8 @@ if file_name is not None:
                                remove_numbers=remove_numbers,
                                remove_punctuation=remove_punctuation)
         st.success("File uploaded")
+    else:
+        st.error("The file is empty")
 
 if write_text:
     st.markdown("### Write your own text")
@@ -51,29 +52,6 @@ if (user_regex and len(user_text) > 1):
     st.success("Regex saved")
     regular_expression(user_regex, user_text)
 
-#HELP SECTION
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.markdown("### Regex template")
-st.markdown("**Here are some regex templates you can use to test your regex:**")
-
-st.text("")
-st.markdown("Number")
-st.code(r"\d+")
-
-st.text("")
-st.markdown("Word with 4 characters")
-st.code(r"\b\w{4}\b")
-
-st.text("")
-st.markdown("Word with 4 characters and a number")
-st.code(r"\b\w{4}\d\b")
-
-st.text("")
-st.markdown("Mail address")
-st.code(r"\b[\w.-]+@[\w.-]+\.\w{2,4}\b")
 
 
 

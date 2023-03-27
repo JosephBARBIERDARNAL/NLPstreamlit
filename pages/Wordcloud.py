@@ -14,6 +14,7 @@ remove_small_words = st.sidebar.checkbox("Remove words with less than 3 characte
 remove_punctuation = st.sidebar.checkbox("Remove the punctuation", value=True)
 remove_url = st.sidebar.checkbox("Remove the urls", value=True)
 remove_numbers = st.sidebar.checkbox("Remove the numbers", value=True)
+lemma = st.sidebar.checkbox("Lemmatize the text", value=True)
 st.sidebar.text("")
 language = st.sidebar.selectbox("Select the language of your text", ["french", "english", "spanish"])
 st.sidebar.text("")

@@ -8,6 +8,8 @@ from wordcloud import WordCloud
 from collections import Counter
 import matplotlib.pyplot as plt
 from textblob import TextBlob
+from nltk.stem import WordNetLemmatizer
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
 
@@ -30,11 +32,16 @@ def open_file(file_name):
 
 nltk.download('stopwords')
 nltk.download('punkt')
+nltk.download('wordnet')
 @st.cache_data()
-def clean_text(text, language="french", words_to_remove=[], remove_punctuation=True, remove_url=True, remove_numbers=True, remove_small_words=True):
-
-    # download stopwords if not already done
-
+def clean_text(text,
+               language="french",
+               words_to_remove=[],
+               remove_punctuation=True,
+               remove_url=True,
+               remove_numbers=True,
+               remove_small_words=True,
+               lemma=True):
 
     text = re.sub(r'\s+', ' ', text)  # replace multiple spaces with a single space
 
@@ -49,6 +56,10 @@ def clean_text(text, language="french", words_to_remove=[], remove_punctuation=T
 
     if remove_small_words:
         text = re.sub(r'\b\w{1,2}\b', '', text) # remove words with 2 or less letters
+
+    if lemma:
+        lemmatizer = WordNetLemmatizer()
+        text = " ".join([lemmatizer.lemmatize(word) for word in text.split()])
 
     # remove pre-defined (from NLTK) + others user-defined stopwords
     stop_words = set(stopwords.words(language))
@@ -132,8 +143,19 @@ def plot_top_n_words(cleaned_text, n, file_name, color, figsize=(12, 6)):
 def sentiment_analysis(text):
     blob = TextBlob(text) #apply the sentiment analysis
     st.text("") #add an empty text (make 1 space)
+    st.text("")  # add an empty text (make 1 space)
+    st.markdown(f"Sentiment analysis, according to TextBlob:") #display the sentiment analysis
     st.markdown(f"- Polarity score: {round(blob.sentiment.polarity,3)}") #display the polarity score
     st.markdown(f"- Subjectivity score: {round(blob.sentiment.subjectivity,3)}") #display the subjectivity score
+
+    st.text("")  # add an empty text (make 1 space)
+    st.text("")  # add an empty text (make 1 space)
+    st.markdown(f"Sentiment analysis, according to VADER:") #display the sentiment analysis
+    sentiment = SentimentIntensityAnalyzer()
+    sentiment_dict = sentiment.polarity_scores(text)
+    st.markdown(f"- Polarity score: {round(sentiment_dict['compound'],3)}") #display the polarity score
+    st.markdown(f"- Subjectivity score: {round(sentiment_dict['neu'],3)}") #display the subjectivity score
+
 
 
 @st.cache_data()

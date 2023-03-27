@@ -3,14 +3,11 @@ from my_functions import open_file, sentiment_analysis
 
 #TITLE
 st.title("Sentiment analysis")
-st.markdown(""" Sentiment analysis (or opinion mining) is a natural language processing (NLP)
-technique used to determine whether data is positive, negative or neutral. Sentiment analysis is
-often performed on textual data to help businesses monitor brand and product sentiment in customer
-feedback, and understand customer needs.""")
+st.markdown(""" *Sentiment analysis (also known as opinion mining or emotion AI) is the use of natural language processing, text analysis, computational linguistics, and biometrics to systematically identify, extract, quantify, and study affective states and subjective information.* [Wikipedia](https://en.wikipedia.org/wiki/Sentiment_analysis)""")
 st.markdown(""" You can use this app to analyze the sentiment of a text.
 You can either upload a file or write your own text.
 The app will then return the polarity and subjectivity of the text.
-They are calculated thanks to the [TextBlob library](https://textblob.readthedocs.io/en/dev/quickstart.html).""")
+They are calculated thanks to the [TextBlob](https://github.com/sloria/textblob) and [VaderSentiment](https://github.com/cjhutto/vaderSentiment) libraries.""")
 
 #SIDEBAR
 st.sidebar.title("Options")

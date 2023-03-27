@@ -16,3 +16,22 @@ st.markdown("You can find the source code on this [Github](https://github.com/Jo
 
 
 
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+st.text("")
+
+# Contact
+st.markdown("###### Contact")
+st.markdown("If you have any questions/suggestions/bug to report, you can contact me via my email: joseph.barbierdarnal@gmail.com")
