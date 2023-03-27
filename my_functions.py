@@ -137,8 +137,6 @@ def plot_top_n_words(cleaned_text, n, file_name, color, figsize=(12, 6)):
 
 
 
-
-
 @st.cache_data()
 def sentiment_analysis(text):
     blob = TextBlob(text) #apply the sentiment analysis
@@ -176,8 +174,26 @@ def regular_expression(pattern, string):
     
 
 
+@st.cache_data()
+def jaccard_similarity(str1, str2):
+    set1 = set(str1.split())
+    set2 = set(str2.split())
+    intersection = len(set1 & set2)
+    union = len(set1 | set2)
+    return intersection / union if union != 0 else 0
 
 
+def display_similarity(select, str1, str2):
+
+    # jaccard similarity
+    if select=="Jaccard similarity":
+        st.text("") # add a space
+        st.markdown("### Jaccard similarity")
+        st.markdown("""The Jaccard similarity is a measure of similarity between two sets.
+        It is defined as the size of the intersection divided by the size of the union of the two sets.
+        More intuitively, it is the number of elements in common divided by the number of elements in total.""")
+        similarity = jaccard_similarity(str1, str2)
+        st.markdown(f"Jaccard similarity between your texts: {round(similarity,3)}%")
 
 
 

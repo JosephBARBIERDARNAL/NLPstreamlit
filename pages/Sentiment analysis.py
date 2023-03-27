@@ -3,7 +3,10 @@ from my_functions import open_file, sentiment_analysis
 
 #TITLE
 st.title("Sentiment analysis")
-st.markdown(""" *Sentiment analysis (also known as opinion mining or emotion AI) is the use of natural language processing, text analysis, computational linguistics, and biometrics to systematically identify, extract, quantify, and study affective states and subjective information.* [Wikipedia](https://en.wikipedia.org/wiki/Sentiment_analysis)""")
+st.markdown(""" *Sentiment analysis (also known as opinion mining or emotion AI) is the use of
+natural language processing, text analysis, computational linguistics, and biometrics to systematically
+identify, extract, quantify, and study affective states and subjective information.*
+[Wikipedia](https://en.wikipedia.org/wiki/Sentiment_analysis)""")
 st.markdown(""" You can use this app to analyze the sentiment of a text.
 You can either upload a file or write your own text.
 The app will then return the polarity and subjectivity of the text.
