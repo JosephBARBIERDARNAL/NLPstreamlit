@@ -7,12 +7,8 @@ st.title("Text analysis")
 st.text("")
 st.markdown("**This app was created in order to simplify text manipulation and analysis.**")
 st.markdown("- Sentiment analysis: polarity and subjectivity")
-st.markdown("- Wordcloud/frequency based on the most frequent words")
-
-#LIBRARIES
-st.text("")
-st.markdown("### Source code")
-st.markdown("You can find the source code on this [Github](https://github.com/JosephBARBIERDARNAL/NLPstreamlit) repo.")
+st.markdown("- Wordcloud (based on frequency) generator")
+st.markdown("- Regular expression search")
 
 
 
