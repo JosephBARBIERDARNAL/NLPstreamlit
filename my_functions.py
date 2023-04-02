@@ -10,6 +10,12 @@ import matplotlib.pyplot as plt
 from textblob import TextBlob
 from nltk.stem import WordNetLemmatizer
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import HashingVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import Levenshtein
+import jellyfish
 
 
 
@@ -182,20 +188,58 @@ def jaccard_similarity(str1, str2):
     union = len(set1 | set2)
     return intersection / union if union != 0 else 0
 
+def levenshtein_sim(text1, text2):
+    lev_sim = 1 - Levenshtein.distance(text1, text2) / max(len(text1), len(text2))
+    return lev_sim
+
+def jaro_winkler(text1, text2):
+    jw_sim = jellyfish.jaro_winkler(text1, text2)
+    return jw_sim
+
+def select_vectorizer(vectorizer):
+    if vectorizer == "CountVectorizer":
+        return CountVectorizer()
+    elif vectorizer == "TfidfVectorizer":
+        return TfidfVectorizer()
+    elif vectorizer == "HashingVectorizer":
+        return HashingVectorizer()
+
 
 def display_similarity(select, str1, str2):
 
     # jaccard similarity
     if select=="Jaccard similarity":
         st.text("") # add a space
-        st.markdown("### Jaccard similarity")
+        similarity = jaccard_similarity(str1, str2)
+        st.markdown(f"**Jaccard similarity between your texts: *{round(similarity,3)}***")
         st.markdown("""The Jaccard similarity is a measure of similarity between two sets.
         It is defined as the size of the intersection divided by the size of the union of the two sets.
         More intuitively, it is the number of elements in common divided by the number of elements in total.""")
-        similarity = jaccard_similarity(str1, str2)
-        st.markdown(f"Jaccard similarity between your texts: {round(similarity,3)}%")
 
+    # cosine similarity
+    elif select=="Cosine similarity":
+        vectorizer = st.selectbox("Select a vectorizer", ["CountVectorizer", "TfidfVectorizer", "HashingVectorizer"])
+        vectorizer = select_vectorizer(vectorizer)
+        similarity = cosine_similarity(vectorizer.fit_transform([str1, str2]).toarray())[0][1]
+        st.markdown(f"**Cosine similarity between your texts: *{round(similarity, 3)}***")
+        st.text("") # add a space
+        st.markdown("""The Cosine similarity is a measure of similarity between two non-zero vectors of an inner product space that measures the cosine of the angle between them.
+        It is defined as the dot product of the two vectors divided by the product of their norms.
+        More intuitively, it is the cosine of the angle between two vectors.""")
+        st.markdown("It is between -1 and 1, where 1 means that the two vectors are identical, 0 means that they are orthogonal, and -1 means that they are exactly opposite.")
 
+    # levenshtein distance
+    elif select=="Levenshtein distance":
+        st.text("")
+        distance = levenshtein_sim(str1, str2)
+        st.markdown(f"**Levenshtein distance between your texts: *{round(distance,3)}***")
+        st.markdown("""The Levenshtein distance is a string metric for measuring the difference between two sequences. This method calculates the minimum number of single-character edits (insertions, deletions, substitutions) required to transform one string into the other. The Levenshtein distance returns a similarity score between 0 and 1, where a score of 1 indicates the two strings are identical""")
+
+    elif select=="Jaro-Winkler Distance":
+        st.text("")
+        distance = jaro_winkler(str1, str2)
+        st.markdown(f"**Jaro-Winkler distance between your texts: *{round(distance,3)}***")
+        st.markdown("""This method calculates the similarity between two strings by measuring the number of matching characters and the number of transpositions required to convert one string into the other. The Jaro-Winkler distance returns a similarity score between 0 and 1, where a score of 1 indicates the two strings are identical""")
 
 
 

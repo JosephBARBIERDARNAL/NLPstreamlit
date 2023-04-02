@@ -1,8 +1,11 @@
 streamlit~=1.20.0
-ipynb~=0.5.1
 pypdf2~=3.0.1
 nltk~=3.8.1
 matplotlib~=3.7.1
 wordcloud~=1.8.2.2
 textblob~=0.17.1
 vaderSentiment~=3.3.2
+sklearn~=0.0.post1
+scikit-learn~=1.2.2
+Levenshtein~=0.20.9
+jellyfish~=0.11.2
