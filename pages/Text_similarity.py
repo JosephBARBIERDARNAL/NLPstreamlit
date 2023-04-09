@@ -1,5 +1,5 @@
 import streamlit as st
-from my_functions import open_file, jaccard_similarity, display_similarity
+from my_functions import open_file, display_similarity
 
 #TITLE
 st.title("Text similarity measurement")
