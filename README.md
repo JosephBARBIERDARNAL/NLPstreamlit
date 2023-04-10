@@ -7,6 +7,7 @@ This is a simple NLP app built with streamlit. It performs (for the moment) the 
 - Sentiment Analysis
 - Wordcloud Generation 
 - Regex Search
+- Text similarity measurement
 
 ## How the app works?
 

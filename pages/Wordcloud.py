@@ -15,11 +15,7 @@ remove_punctuation = st.sidebar.checkbox("Remove the punctuation", value=True)
 remove_url = st.sidebar.checkbox("Remove the urls", value=True)
 remove_numbers = st.sidebar.checkbox("Remove the numbers", value=True)
 lemma = st.sidebar.checkbox("Lemmatize the text", value=True)
-st.sidebar.text("")
 language = st.sidebar.selectbox("Select the language of your text", ["french", "english", "spanish"])
-st.sidebar.text("")
-number_of_word = st.sidebar.slider("Number of words you want to plot", 5, 100)
-st.sidebar.text("")
 color = st.sidebar.color_picker("Color to use for the barplot", "#E2070A")
 st.sidebar.text("")
 
@@ -54,7 +50,10 @@ if page_text != "Hello world":
         cleaned_text = clean_text(page_text, language=language, words_to_remove=stopwords_to_add)
 
     #WORDCLOUD
+    st.sidebar.text("")
+    number_of_word = st.slider("Number of words you want to plot", 5, 100, value=50)
     wordcloud = word_cloud_plot(cleaned_text, number_of_word)
+    st.text("")
 
     #TOP N WORDS
     if file_name:

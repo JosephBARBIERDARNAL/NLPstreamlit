@@ -8,18 +8,19 @@ st.markdown("*Regular expressions are used in search engines, in search and repl
 st.markdown("In this app, you can write your own regular expression and test it on a text of your choice. You have the choice between a text you write yourself or a text you upload. The app will then return the matches found in the text.")
 
 #SIDEBAR
-write_text = st.sidebar.checkbox("Write my own text")
-st.sidebar.title("Options")
-remove_small_words = st.sidebar.checkbox("Remove words with less than 3 characters")
-remove_punctuation = st.sidebar.checkbox("Remove the punctuation")
-remove_url = st.sidebar.checkbox("Remove the urls")
-remove_numbers = st.sidebar.checkbox("Remove the numbers")
+#st.sidebar.title("Options")
+#remove_small_words = st.sidebar.checkbox("Remove words with less than 3 characters")
+#remove_punctuation = st.sidebar.checkbox("Remove the punctuation")
+#remove_url = st.sidebar.checkbox("Remove the urls")
+#remove_numbers = st.sidebar.checkbox("Remove the numbers")
 
 #SENTIMENT ANALYSIS
 st.text("")
 st.text("")
 st.text("")
+st.text("")
 file_name = None
+write_text = st.checkbox("Write my own text")
 if not write_text:
     st.markdown("### Upload a text")
     file_name = st.file_uploader("Only PDF files are accepted", type="pdf")
@@ -27,11 +28,7 @@ user_text = "Hello world"
 if file_name is not None:
     user_text = open_file(file_name)
     if len(user_text) > 0:
-        user_text = clean_text(user_text,
-                               remove_small_words=remove_small_words,
-                               remove_url=remove_url,
-                               remove_numbers=remove_numbers,
-                               remove_punctuation=remove_punctuation)
+        user_text = clean_text(user_text)
         st.success("File uploaded")
     else:
         st.error("The file is empty")

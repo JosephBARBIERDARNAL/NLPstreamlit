@@ -148,13 +148,13 @@ def sentiment_analysis(text):
     blob = TextBlob(text) #apply the sentiment analysis
     st.text("") #add an empty text (make 1 space)
     st.text("")  # add an empty text (make 1 space)
-    st.markdown(f"Sentiment analysis, according to TextBlob:") #display the sentiment analysis
+    st.markdown(f"**Sentiment analysis, according to TextBlob:**") #display the sentiment analysis
     st.markdown(f"- Polarity score: {round(blob.sentiment.polarity,3)}") #display the polarity score
     st.markdown(f"- Subjectivity score: {round(blob.sentiment.subjectivity,3)}") #display the subjectivity score
 
     st.text("")  # add an empty text (make 1 space)
     st.text("")  # add an empty text (make 1 space)
-    st.markdown(f"Sentiment analysis, according to VADER:") #display the sentiment analysis
+    st.markdown(f"**Sentiment analysis, according to VADER:**") #display the sentiment analysis
     sentiment = SentimentIntensityAnalyzer()
     sentiment_dict = sentiment.polarity_scores(text)
     st.markdown(f"- Polarity score: {round(sentiment_dict['compound'],3)}") #display the polarity score

@@ -13,13 +13,16 @@ The app will then return the polarity and subjectivity of the text.
 They are calculated thanks to the [TextBlob](https://github.com/sloria/textblob) and [VaderSentiment](https://github.com/cjhutto/vaderSentiment) libraries.""")
 
 #SIDEBAR
-st.sidebar.title("Options")
-write_text = st.sidebar.checkbox("Write your own text")
+#st.sidebar.title("Options")
+
 
 #SENTIMENT ANALYSIS
 st.text("")
 st.text("")
 st.text("")
+st.text("")
+st.text("")
+write_text = st.checkbox("Write my own text")
 file_name = None
 if not write_text:
     st.markdown("### Upload a text")
