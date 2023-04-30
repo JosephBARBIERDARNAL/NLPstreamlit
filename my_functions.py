@@ -7,9 +7,7 @@ from nltk.tokenize import word_tokenize
 from wordcloud import WordCloud
 from collections import Counter
 import matplotlib.pyplot as plt
-from textblob import TextBlob
 from nltk.stem import WordNetLemmatizer
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import HashingVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -17,6 +15,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 import Levenshtein
 import jellyfish
 
+
+def make_space(n:int):
+    for _ in range(n):
+        st.text("")
 
 
 @st.cache_data()
@@ -140,25 +142,6 @@ def plot_top_n_words(cleaned_text, n, file_name, color, figsize=(12, 6)):
             data=img,
             file_name=name,
             mime="image/png")
-
-
-
-@st.cache_data()
-def sentiment_analysis(text):
-    blob = TextBlob(text) #apply the sentiment analysis
-    st.text("") #add an empty text (make 1 space)
-    st.text("")  # add an empty text (make 1 space)
-    st.markdown(f"**Sentiment analysis, according to TextBlob:**") #display the sentiment analysis
-    st.markdown(f"- Polarity score: {round(blob.sentiment.polarity,3)}") #display the polarity score
-    st.markdown(f"- Subjectivity score: {round(blob.sentiment.subjectivity,3)}") #display the subjectivity score
-
-    st.text("")  # add an empty text (make 1 space)
-    st.text("")  # add an empty text (make 1 space)
-    st.markdown(f"**Sentiment analysis, according to VADER:**") #display the sentiment analysis
-    sentiment = SentimentIntensityAnalyzer()
-    sentiment_dict = sentiment.polarity_scores(text)
-    st.markdown(f"- Polarity score: {round(sentiment_dict['compound'],3)}") #display the polarity score
-    st.markdown(f"- Subjectivity score: {round(sentiment_dict['neu'],3)}") #display the subjectivity score
 
 
 

@@ -1,15 +1,15 @@
 import streamlit as st
-from my_functions import open_file, clean_text, word_cloud_plot, plot_top_n_words
+from my_functions import open_file, clean_text, word_cloud_plot, plot_top_n_words, make_space
 from nltk.tokenize import word_tokenize
 from collections import Counter
 
 #TITLE
 st.title("Wordcloud")
-st.text("")
+make_space(1)
 
 #CUSTOMIZATION
 st.sidebar.markdown("## Options")
-st.sidebar.text("")
+make_space(1)
 remove_small_words = st.sidebar.checkbox("Remove words with less than 3 characters", value=True)
 remove_punctuation = st.sidebar.checkbox("Remove the punctuation", value=True)
 remove_url = st.sidebar.checkbox("Remove the urls", value=True)
@@ -17,7 +17,7 @@ remove_numbers = st.sidebar.checkbox("Remove the numbers", value=True)
 lemma = st.sidebar.checkbox("Lemmatize the text", value=True)
 language = st.sidebar.selectbox("Select the language of your text", ["french", "english", "spanish"])
 color = st.sidebar.color_picker("Color to use for the barplot", "#E2070A")
-st.sidebar.text("")
+make_space(1)
 
 
 
@@ -26,8 +26,8 @@ file_name = st.file_uploader("", type=["pdf"])
 page_text = "Hello world"
 if file_name is not None:
     page_text = open_file(file_name)
-st.text("")
-st.text("")
+    st.success("File uploaded")
+make_space(2)
 
 if page_text != "Hello world":
     #CLEAN FILE TEXT
@@ -39,7 +39,7 @@ if page_text != "Hello world":
                               remove_small_words=remove_small_words)
 
     #ADD USER'S STOPWORDS
-    st.text("")
+    make_space(1)
     tokenized_text = word_tokenize(cleaned_text)
     word_counts = Counter(tokenized_text)
     most_common_words = dict(word_counts.most_common(100))
@@ -50,7 +50,7 @@ if page_text != "Hello world":
         cleaned_text = clean_text(page_text, language=language, words_to_remove=stopwords_to_add)
 
     #WORDCLOUD
-    st.sidebar.text("")
+    make_space(1)
     number_of_word = st.slider("Number of words you want to plot", 5, 100, value=50)
     wordcloud = word_cloud_plot(cleaned_text, number_of_word)
     st.text("")
@@ -60,28 +60,7 @@ if page_text != "Hello world":
         plot_top_n_words(cleaned_text, number_of_word, color=color, file_name=file_name.name)
     else:
         plot_top_n_words(cleaned_text, number_of_word, color=color, file_name="Hello world")
-
-
-
-
-
-
-
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
+make_space(20)
 
 # Contact
 st.markdown("###### Contact")

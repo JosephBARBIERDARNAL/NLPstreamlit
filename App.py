@@ -1,47 +1,29 @@
 import streamlit as st
+from my_functions import make_space
 
 #TITLE
-st.title("Text analysis")
+st.title("A simple NLP app")
 
 #ABOUT APP
-st.text("")
+make_space(1)
 st.markdown("##### **This app was created in order to simplify text manipulation and analysis. You can perform the tasks listed below without writing a single line of code.**")
-st.markdown("- Sentiment analysis: polarity and subjectivity")
+st.markdown("- Sentiment analysis")
 st.markdown("- Wordcloud generator")
 st.markdown("- Regular expression search")
 st.markdown("- Text similarity measurement")
 
-st.text("")
-st.text("")
-st.markdown("##### **How to use this app**")
-st.markdown("- 1. Select the task you want to perform")
+make_space(1)
+st.markdown("### **How to use this app**")
+st.markdown("- 1. Select the task you want to perform on the sidebar")
 st.markdown("- 2. Upload a pdf file (or write/copy-paste your text in the text area)")
 st.markdown("- 3. Select the parameters (if any)")
 st.markdown("- 4. Get the results!")
 
-st.text("")
-st.text("")
-st.markdown("##### **Upcoming features**")
-st.markdown("- Able to read not only pdf files")
-st.markdown("- Possibility to consider the upload file as a list of strings (ex: each sentence is a string)")
-
-
-
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
-st.text("")
+make_space(1)
+st.markdown("### **Upcoming features**")
+st.markdown("- Capable of reading other file types")
+st.markdown("- More customization and a better presentation of results")
+make_space(20)
 
 # Contact
 st.markdown("###### Contact")
