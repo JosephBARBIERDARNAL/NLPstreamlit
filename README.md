@@ -1,7 +1,7 @@
 # Natural language processing app
 
 You can try the app
-[here](https://josephbarbierdarnal-nlpstreamlit-streamlit-app-5f719o.streamlit.app).
+[here](https://josephbarbier-text.streamlit.app).
 New feature now available: AI help assistant specialized in text analysis and knowing how the application works. Just ask your question direclty in the Help section!
 
 This is a simple NLP app built with streamlit. It performs (for the moment) the following tasks:
