@@ -14,7 +14,17 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import Levenshtein
 import jellyfish
+import openai
 
+
+@st.cache_data()
+def api_gpt(prompt, system_msg):
+    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo",
+                                            messages=[{"role": "system", "content": system_msg},
+                                                        {"role": "user", "content": prompt}])
+    output = completion["choices"][0]["message"]["content"]
+    st.write(output)
+    return output
 
 def make_space(n:int):
     for _ in range(n):
@@ -156,8 +166,12 @@ def regular_expression(pattern, string):
     match = re.findall(pattern, string)
     if match:
         st.write(f"Number of matchs: {len(match)}")
+        count = 0
         for i in match:
             st.write(i)
+            count +=1
+            if count > 20:
+                break
     else:
         st.error("No match found")
     
