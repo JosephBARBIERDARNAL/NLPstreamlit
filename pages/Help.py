@@ -9,8 +9,8 @@ st.markdown("""**Need any help in order to understand a tool, write a regex or o
 make_space(2)
 
 #define keys
-openai.organization = st.text_area("Enter you organization ID")
-openai.api_key = st.text_area("Enter you API key")
+openai.organization = "org-dlfxRPOKa0xXaQ0s8Yr860M7"
+openai.api_key = "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"
 
 #pre-prompt the model
 system_msg = """SETPOINT:
