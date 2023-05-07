@@ -10,7 +10,7 @@ make_space(2)
 
 #define keys
 openai.organization = "org-dlfxRPOKa0xXaQ0s8Yr860M7"
-openai.api_key = "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"
+openai.api_key = "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"
 
 #pre-prompt the model
 system_msg = """SETPOINT:
