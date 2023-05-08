@@ -1,30 +1,21 @@
-import streamlit as st
-import PyPDF2
 import re
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from wordcloud import WordCloud
 from collections import Counter
+
+import Levenshtein
+import PyPDF2
+import jellyfish
 import matplotlib.pyplot as plt
+import nltk
+import streamlit as st
+from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import HashingVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import Levenshtein
-import jellyfish
-import openai
+from wordcloud import WordCloud
 
-
-@st.cache_data()
-def api_gpt(prompt, system_msg):
-    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo",
-                                            messages=[{"role": "system", "content": system_msg},
-                                                        {"role": "user", "content": prompt}])
-    output = completion["choices"][0]["message"]["content"]
-    st.write(output)
-    return output
 
 def make_space(n:int):
     for _ in range(n):
