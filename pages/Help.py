@@ -1,4 +1,5 @@
 import openai
+import os
 import streamlit as st
 from my_functions import make_space, api_gpt
 
@@ -8,9 +9,8 @@ st.markdown("""**Need any help in order to understand a tool, write a regex or o
             an explanation of how this app works.**""")
 make_space(2)
 
-#define keys
-openai.organization = "org-dlfxRPOKa0xXaQ0s8Yr860M7"
-openai.api_key = "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"
+#define key
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 #pre-prompt the model
 system_msg = """SETPOINT:
