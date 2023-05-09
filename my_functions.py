@@ -15,6 +15,16 @@ from sklearn.feature_extraction.text import HashingVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from wordcloud import WordCloud
+import openai
+
+@st.cache_data()
+def api_gpt(prompt, system_msg):
+    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo",
+                                            messages=[{"role": "system", "content": system_msg},
+                                                        {"role": "user", "content": prompt}])
+    output = completion["choices"][0]["message"]["content"]
+    st.write(output)
+    return output
 
 
 def make_space(n:int):

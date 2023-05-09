@@ -84,6 +84,7 @@
 # Default: randomly generated secret key.
 # cookieSecret = "07a8ad7ef01170b4dedc2cddb304c9251d6d047373c096781b0f9963bed1f91d"
 
+
 # If false, will attempt to open a browser window on start.
 # Default: false unless (1) we are on a Linux box where DISPLAY is unset, or (2) we are running in the Streamlit Atom plugin.
 # headless = false
@@ -185,4 +186,3 @@ base = "light"
 
 # Font family for all text in the app, except code blocks. One of "sans serif", "serif", or "monospace".
 #font = "sans serif"
-

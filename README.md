@@ -10,6 +10,9 @@ This is a simple NLP app built with streamlit. It performs (for the moment) the 
 - Regex Search
 - Text similarity measurement
 
+There is now an AI assistant specialized in text analysis and who knows how to use the app.
+You can discuss with it in the ***Help*** section of the app and ask it to write regex or explain how to use the app.
+
 ## How the app works?
 
 - You select the task you want to perform.

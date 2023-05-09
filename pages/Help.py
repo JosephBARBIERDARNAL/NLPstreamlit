@@ -1,5 +1,4 @@
 import openai
-import os
 import streamlit as st
 from my_functions import make_space, api_gpt
 
@@ -10,7 +9,7 @@ st.markdown("""**Need any help in order to understand a tool, write a regex or o
 make_space(2)
 
 #define key
-openai.api_key = os.environ["OPENAI_API_KEY"]
+openai.api_key = st.secrets["openai_key"]
 
 #pre-prompt the model
 system_msg = """SETPOINT:
@@ -22,8 +21,8 @@ system_msg = """SETPOINT:
                 and respectful assistant and you always explain things clearly to users when they ask
                 a question. Users have access to a web application (developed by Joseph Barbier,
                 a statistics student from Bordeaux University) that performs all these features without coding.
-                The purpose of this application is to facilitate text analysis. To that end, I will give a
-                brief description of of each functionality :
+                The purpose of this application is to facilitate text analysis and make it accessible to everyone.
+                To that end, I will give a brief description of of each functionality :
                 - Regular expression: the user uploads a file and writes a regular expression. The application returns
                 all the terms that that match the regular expression.
                 - Sentiment analysis: the user downloads a file, chooses (optionally) to select each sentence as
@@ -36,7 +35,7 @@ system_msg = """SETPOINT:
                 should be long enough so that the user have all the important information about the concept he is
                 talking about. The user's question is below. 
                 
-                QUESTION:
+                User:
                 """
 prompt = st.text_area("Enter your question")
 output = None
@@ -49,13 +48,9 @@ if len(prompt)>5:
 if output is not None:
     new_prompt = st.text_area("Enter your response")
     if len(new_prompt) > 5:
-        new_output = api_gpt(prompt+output+new_prompt, system_msg) #keep precedent messages in the conversion
-
-
-
-
-
-
+        #create a structure for the conversation so that the AI can keep track of the precedent messages
+        new_full_prompt = "User: " + prompt + " \n\nAI: " + output + " \n\nUser: " + new_prompt + " \n\nAI: "
+        new_output = api_gpt(new_full_prompt, system_msg)
 
 make_space(20)
 st.markdown("###### Contact")
