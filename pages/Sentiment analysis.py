@@ -1,7 +1,7 @@
-import streamlit as st
-import numpy as np
 import matplotlib.pyplot as plt
-from my_functions import open_file, make_space, clean_text
+import streamlit as st
+
+from my_functions import open_file, make_space
 from sentiment_functions import sentiment_analysis, apply_sentiment_analysis, from_pdf_to_string_list
 
 #TITLE
@@ -12,8 +12,8 @@ identify, extract, quantify, and study affective states and subjective informati
 [Wikipedia](https://en.wikipedia.org/wiki/Sentiment_analysis)""")
 st.markdown(""" You can use this app to analyze the sentiment of a text.
 You can either upload a file or write your own text.
-The app will then return the polarity and subjectivity of the text.
-They are calculated thanks to the [TextBlob](https://github.com/sloria/textblob) and [VaderSentiment](https://github.com/cjhutto/vaderSentiment) libraries.""")
+The app will then return the polarity and the emotion of the text.
+They are calculated thanks to the [VaderSentiment](https://github.com/cjhutto/vaderSentiment) and [Text2Emotion](https://github.com/aman2656/text2emotion-library/tree/master) libraries.""")
 
 
 #SENTIMENT ANALYSIS
@@ -36,7 +36,7 @@ if not write_text:
             df_SA = apply_sentiment_analysis(page_text) #compute sentiment analysis on every sentence
             remove_zeros = st.checkbox("Should sentence with exact score of 0 removed? (recommended)")
             if remove_zeros:
-                df_SA = df_SA.loc[~(df_SA[['Polarity_TextBlob', 'Subjectivity_TextBlob', 'Polarity_VaderSentiment']] == 0).all(axis=1)]
+                df_SA = df_SA.loc[~(df_SA[['Polarity_VaderSentiment']] == 0).all(axis=1)]
 
             # print and make the df available as download
             st.dataframe(df_SA)
@@ -49,12 +49,13 @@ if not write_text:
             make_space(3)
             plot_hist = st.checkbox("Plot distribution of the results", value=True)
             if plot_hist:
+                bins = st.slider("Number of bins", min_value=10, max_value=100, value=40)
                 fig, ax = plt.subplots()
-                ax.hist(df_SA.Polarity_VaderSentiment, bins=40, facecolor='cyan', edgecolor='black')
-                ax.set_title('Distribution of Polarity (VaderSentiment)')
+                ax.hist(df_SA.Polarity_VaderSentiment, bins=bins, facecolor='cyan', edgecolor='black')
+                ax.set_title('Distribution of Polarity')
                 st.pyplot(fig)
             make_space(2)
-            display_stat = st.checkbox("Display VaderSentiment descriptive statistics", value=True)
+            display_stat = st.checkbox("Display descriptive statistics", value=True)
             make_space(1)
             if display_stat:
                 col1, col2, col3 = st.columns(3)
@@ -80,15 +81,13 @@ else:
     user_text = st.text_area("It's recommend to write in English", height=200, max_chars=10000)
     if user_text:
         st.success("Text saved!")
-    if user_text:
         sentiment_analysis(user_text)
 make_space(1)
 
 #INFORMATION
 make_space(20)
-st.markdown("### About polarity and subjectivity")
+st.markdown("### About polarity")
 st.markdown("- Polarity is a float within the range [-1, 1]. A score of 0 is neutral, a score of 1 is very positive, and a score of -1 is  very negative.")
-st.markdown("- Subjectivity is a float within the range [0, 1] where 0 is very objective and 1 is very subjective.")
 
 #CONTACT
 make_space(5)

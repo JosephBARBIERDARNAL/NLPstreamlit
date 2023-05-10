@@ -1,11 +1,13 @@
 import openai
 import streamlit as st
+
 from my_functions import make_space, api_gpt
 
 st.title("Help")
 st.markdown("""**Need any help in order to understand a tool, write a regex or other?
             Ask our specialized in text analysis language model. You can also ask for
             an explanation of how this app works.**""")
+st.markdown("""**Currently, it is only possible to exchange 3 times in a row with the assistant. However, you can just reload the page in order to ask more questions.**""")
 make_space(2)
 
 #define key
@@ -46,11 +48,19 @@ if len(prompt)>5:
 
 #allow the user to discuss with the AI
 if output is not None:
-    new_prompt = st.text_area("Enter your response")
+    new_prompt = st.text_area("Enter your response", key="new_prompt")
+    new_output = None
     if len(new_prompt) > 5:
         #create a structure for the conversation so that the AI can keep track of the precedent messages
         new_full_prompt = "User: " + prompt + " \n\nAI: " + output + " \n\nUser: " + new_prompt + " \n\nAI: "
         new_output = api_gpt(new_full_prompt, system_msg)
+        make_space(1)
+        if new_output is not None:
+            new_new_prompt = st.text_area("Enter your response", key="new_new_prompt")
+            new_new_output = None
+            if len(new_new_prompt) > 5:
+                new_new_full_prompt = new_full_prompt + new_output + " \n\nUser: " + new_new_prompt + " \n\nAI: "
+                new_new_output = api_gpt(new_new_full_prompt, system_msg)
 
 make_space(20)
 st.markdown("###### Contact")
