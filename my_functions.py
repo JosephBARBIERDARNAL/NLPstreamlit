@@ -6,6 +6,7 @@ import PyPDF2
 import jellyfish
 import matplotlib.pyplot as plt
 import nltk
+import openai
 import streamlit as st
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -15,7 +16,7 @@ from sklearn.feature_extraction.text import HashingVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from wordcloud import WordCloud
-import openai
+
 
 @st.cache_data()
 def api_gpt(prompt, system_msg):
@@ -43,7 +44,6 @@ def open_file(file_name):
             page = pdf_reader.pages[page_num]
             page_text += page.extract_text().lower()
         return page_text
-
     else:
         st.error("File type not supported. Try converting to PDF.")
         return ""

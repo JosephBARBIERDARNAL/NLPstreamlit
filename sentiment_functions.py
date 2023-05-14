@@ -32,12 +32,15 @@ def from_pdf_to_string_list(file):
     return clean_sentences
 
 def create_pie_chart(data_dict):
-    labels = list(data_dict.keys())
-    values = list(data_dict.values())
-    fig, ax = plt.subplots()
-    ax.pie(values, labels=labels, autopct='%1.1f%%', startangle=90)
-    ax.axis('equal')
-    st.pyplot(fig)
+    try:
+        labels = list(data_dict.keys())
+        values = list(data_dict.values())
+        fig, ax = plt.subplots()
+        ax.pie(values, labels=labels, autopct='%1.1f%%', startangle=90)
+        ax.axis('equal')
+        st.pyplot(fig)
+    except ValueError:
+        st.error("No emotions detected in the text.")
 
 @st.cache_data()
 def sentiment_analysis(text):
@@ -66,7 +69,7 @@ def sentiment_analysis(text):
         create_pie_chart(emotion_dict)
 
 
-
+@st.cache_data()
 def apply_sentiment_analysis(strings_list):
     # Initialize empty lists to store results
     string_col = []
@@ -97,4 +100,33 @@ def apply_sentiment_analysis(strings_list):
     # Remove duplicates row
     df = df.drop_duplicates(keep='first')
 
+    return df
+
+def csv_sentiment_analysis(df, str_col):
+    df[str_col] = df[str_col].astype(str)
+    df = df[[str_col]]
+    df = df.drop_duplicates(keep='first')
+    with st.spinner("Performing sentiment analysis"):
+        sentiment_scores = []
+        fear_scores = []
+        anger_scores = []
+        sadness_scores = []
+        surprise_scores = []
+        happiness_scores = []
+        analyzer_vader = SentimentIntensityAnalyzer()
+        for string in df[str_col]:
+            emotion_dict = te.get_emotion(string)
+            happiness_scores.append(emotion_dict['Happy'])
+            sadness_scores.append(emotion_dict['Sad'])
+            anger_scores.append(emotion_dict['Angry'])
+            fear_scores.append(emotion_dict['Fear'])
+            surprise_scores.append(emotion_dict['Surprise'])
+            sentiment = analyzer_vader.polarity_scores(string)
+            sentiment_scores.append(sentiment['compound'])
+        df['sentiment_vader'] = sentiment_scores
+        df['happiness'] = happiness_scores
+        df['sadness'] = sadness_scores
+        df['anger'] = anger_scores
+        df['fear'] = fear_scores
+        df['surprise'] = surprise_scores
     return df
