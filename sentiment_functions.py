@@ -102,6 +102,8 @@ def apply_sentiment_analysis(strings_list):
 
     return df
 
+
+@st.cache_data()
 def csv_sentiment_analysis(df, str_col):
     df[str_col] = df[str_col].astype(str)
     df = df[[str_col]]

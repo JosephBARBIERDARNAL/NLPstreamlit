@@ -3,8 +3,8 @@ import pandas as pd
 import streamlit as st
 
 from my_functions import open_file, make_space
-from sentiment_functions import sentiment_analysis, apply_sentiment_analysis, from_pdf_to_string_list, \
-    csv_sentiment_analysis
+from sentiment_functions import csv_sentiment_analysis
+from sentiment_functions import sentiment_analysis, apply_sentiment_analysis, from_pdf_to_string_list
 
 #TITLE
 st.title("Sentiment analysis")
