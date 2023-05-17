@@ -22,11 +22,6 @@ st.markdown("- 1. Select the task you want to perform on the sidebar")
 st.markdown("- 2. Upload a pdf file (or write/copy-paste your text in the text area)")
 st.markdown("- 3. Select the parameters (if any)")
 st.markdown("- 4. Get the results!")
-
-make_space(1)
-st.markdown("### **Upcoming features**")
-st.markdown("- Capable of reading other file types")
-st.markdown("- More customization and a better presentation of results")
 make_space(20)
 
 # Contact

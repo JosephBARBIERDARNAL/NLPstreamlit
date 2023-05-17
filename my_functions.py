@@ -163,16 +163,15 @@ def regular_expression(pattern, string):
     Output: a list of all the matches
     """
     # find all matches
+    st.write(string)
     pattern = re.compile(pattern)
     match = re.findall(pattern, string)
+    matchs = []
     if match:
         st.write(f"Number of matchs: {len(match)}")
-        count = 0
         for i in match:
-            st.write(i)
-            count +=1
-            if count > 20:
-                break
+            matchs.append(i)
+        st.table(matchs)
     else:
         st.error("No match found")
     
