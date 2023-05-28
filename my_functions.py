@@ -91,7 +91,7 @@ def clean_text(text,
     return text
 
     
-
+@st.cache_data(experimental_allow_widgets=True)
 def word_cloud_plot(cleaned_text, n):
 
     st.text("") # add a space
@@ -120,10 +120,14 @@ def word_cloud_plot(cleaned_text, n):
 
 
 
+@st.cache_data()
+def count_words(text):
+    words = text.split()  # Split the text into words using space as a separator
+    word_count = len(words)  # Count the number of words
+    return word_count
 
 
-
-
+@st.cache_data(experimental_allow_widgets=True)
 def plot_top_n_words(cleaned_text, n, file_name, color, figsize=(12, 6)):
     st.text("")  # add a space
 

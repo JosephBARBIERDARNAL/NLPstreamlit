@@ -1,10 +1,12 @@
-import streamlit as st
-from my_functions import open_file, clean_text, word_cloud_plot, plot_top_n_words, make_space
-from nltk.tokenize import word_tokenize
 from collections import Counter
 
+import streamlit as st
+from nltk.tokenize import word_tokenize
+
+from my_functions import open_file, clean_text, word_cloud_plot, plot_top_n_words, make_space, count_words
+
 #TITLE
-st.title("Wordcloud")
+st.title("Wordcloud generator")
 make_space(1)
 
 #CUSTOMIZATION
@@ -27,9 +29,16 @@ page_text = "Hello world"
 if file_name is not None:
     page_text = open_file(file_name)
     st.success("File uploaded")
-make_space(2)
 
 if page_text != "Hello world":
+
+    #COUNT WORDS
+    number_of_words = count_words(page_text)
+    st.markdown(f"Number of words detected: **{number_of_words}**")
+    if number_of_words < 4:
+        st.error(f"The file you uploaded is too short")
+        st.stop()
+
     #CLEAN FILE TEXT
     cleaned_text = clean_text(page_text,
                               language=language,
@@ -38,8 +47,15 @@ if page_text != "Hello world":
                               remove_numbers=remove_numbers,
                               remove_small_words=remove_small_words)
 
+    #COUNT WORDS IN CLEANED TEXT
+    number_of_words_cleaned = count_words(cleaned_text)
+    st.markdown(f"Number of words detected (after cleaning): **{number_of_words_cleaned}**")
+    if number_of_words_cleaned < 4:
+        st.error(f"The file you uploaded is too short")
+        st.stop()
+
     #ADD USER'S STOPWORDS
-    make_space(1)
+    make_space(3)
     tokenized_text = word_tokenize(cleaned_text)
     word_counts = Counter(tokenized_text)
     most_common_words = dict(word_counts.most_common(100))
