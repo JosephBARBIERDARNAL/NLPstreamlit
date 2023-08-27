@@ -19,6 +19,10 @@ from wordcloud import WordCloud
 
 
 @st.cache_data()
+def run_all():
+    st.write("work in progress...")
+
+@st.cache_data()
 def api_gpt(prompt, system_msg):
     completion = openai.ChatCompletion.create(model="gpt-3.5-turbo",
                                             messages=[{"role": "system", "content": system_msg},

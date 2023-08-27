@@ -32,6 +32,7 @@ def from_pdf_to_string_list(file):
     return clean_sentences
 
 def create_pie_chart(data_dict):
+    del data_dict["Fear"] #removing fear from the pie chart
     try:
         labels = list(data_dict.keys())
         values = list(data_dict.values())
