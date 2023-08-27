@@ -49,24 +49,19 @@ if file_type in ["PDF", "CSV"]:
 
             # plot sentiment distribution
             make_space(3)
-            plot_hist = st.checkbox("Plot distribution of the results", value=True)
-            if plot_hist:
-                bins = st.slider("Number of bins", min_value=10, max_value=100, value=40)
-                fig, ax = plt.subplots()
-                ax.hist(df_SA.Polarity_VaderSentiment, bins=bins, facecolor='cyan', edgecolor='black')
-                ax.set_title('Distribution of Polarity')
-                st.pyplot(fig)
+            bins = st.slider("Number of bins", min_value=10, max_value=100, value=40)
+            fig, ax = plt.subplots()
+            ax.hist(df_SA.Polarity_VaderSentiment, bins=bins, facecolor='cyan', edgecolor='black')
+            ax.set_title('Distribution of Polarity')
+            st.pyplot(fig)
             make_space(2)
-            display_stat = st.checkbox("Display descriptive statistics", value=True)
-            make_space(1)
-            if display_stat:
-                col1, col2, col3 = st.columns(3)
-                average_vader = round(df_SA.Polarity_VaderSentiment.mean(),2)
-                median_vader = round(df_SA.Polarity_VaderSentiment.median(),2)
-                std_vader = round(df_SA.Polarity_VaderSentiment.std(),2)
-                col1.metric(f"Mean", average_vader, average_vader)
-                col2.metric("Median", median_vader, median_vader)
-                col3.metric("Stdev", std_vader, std_vader)
+            col1, col2, col3 = st.columns(3)
+            average_vader = round(df_SA.Polarity_VaderSentiment.mean(),2)
+            median_vader = round(df_SA.Polarity_VaderSentiment.median(),2)
+            std_vader = round(df_SA.Polarity_VaderSentiment.std(),2)
+            col1.metric(f"Mean", average_vader, average_vader)
+            col2.metric("Median", median_vader, median_vader)
+            col3.metric("Stdev", std_vader, std_vader)
 
         elif file_type == "PDF" and not string_list:
             page_text = open_file(file_name)
@@ -93,24 +88,21 @@ if file_type in ["PDF", "CSV"]:
 
                 # plot sentiment distribution
                 make_space(3)
-                plot_hist = st.checkbox("Plot distribution of the results", value=True)
-                if plot_hist:
-                    bins = st.slider("Number of bins", min_value=10, max_value=100, value=40)
-                    fig, ax = plt.subplots()
-                    ax.hist(new_df_csv.sentiment_vader, bins=bins, facecolor='cyan', edgecolor='black')
-                    ax.set_title('Distribution of Polarity')
-                    st.pyplot(fig)
+                bins = st.slider("Number of bins", min_value=10, max_value=100, value=40)
+                fig, ax = plt.subplots()
+                ax.hist(new_df_csv.sentiment_vader, bins=bins, facecolor='cyan', edgecolor='black')
+                ax.set_title('Distribution of Polarity')
+                st.pyplot(fig)
                 make_space(2)
                 display_stat = st.checkbox("Display descriptive statistics", value=True)
                 make_space(1)
-                if display_stat:
-                    col1, col2, col3 = st.columns(3)
-                    average_vader = round(new_df_csv.sentiment_vader.mean(), 2)
-                    median_vader = round(new_df_csv.sentiment_vader.median(), 2)
-                    std_vader = round(new_df_csv.sentiment_vader.std(), 2)
-                    col1.metric(f"Mean", average_vader, average_vader)
-                    col2.metric("Median", median_vader, median_vader)
-                    col3.metric("Stdev", std_vader, std_vader)
+                col1, col2, col3 = st.columns(3)
+                average_vader = round(new_df_csv.sentiment_vader.mean(), 2)
+                median_vader = round(new_df_csv.sentiment_vader.median(), 2)
+                std_vader = round(new_df_csv.sentiment_vader.std(), 2)
+                col1.metric(f"Mean", average_vader, average_vader)
+                col2.metric("Median", median_vader, median_vader)
+                col3.metric("Stdev", std_vader, std_vader)
             else:
                 st.error("File type is not csv")
 

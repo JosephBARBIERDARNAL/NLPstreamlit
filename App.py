@@ -8,7 +8,6 @@ st.title("A simple NLP app")
 #ABOUT APP
 make_space(1)
 st.markdown("##### **This app was created in order to simplify text manipulation and analysis. You can perform the tasks listed below without writing a single line of code.**")
-st.markdown("##### **It is now possible to ask questions about how the app works, how to write a regex or anything else to a specialized version of GPT-3.5 in the Help section.**")
 st.markdown("##### **You can check the source code at this [repo](https://github.com/JosephBARBIERDARNAL/NLPstreamlit).**")
 
 st.markdown("- Sentiment analysis")

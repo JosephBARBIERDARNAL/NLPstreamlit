@@ -46,26 +46,28 @@ def create_pie_chart(data_dict):
 @st.cache_data()
 def sentiment_analysis(text):
     make_space(2)
+    emotion_dict = te.get_emotion(text)
+
     st.markdown(f"**Sentiment analysis, according to VADER:**") #display the sentiment analysis
     sentiment = SentimentIntensityAnalyzer()
     sentiment_dict = sentiment.polarity_scores(text)
     st.markdown(f"- Polarity score: {round(sentiment_dict['compound'],3)}") #display the polarity score
 
     st.text("")
-    col1, col2 = st.columns([1,2])
+    col1, col2 = st.columns([1,3])
+    st.markdown("**Emotion analysis, according to Text2Emotion:**")
     with col1:
-        st.markdown("**Emotion analysis, according to Text2Emotion:**")
-        emotion_dict = te.get_emotion(text)
-        happinnes =  emotion_dict['Happy']
-        sadness = emotion_dict['Sad']
-        anger = emotion_dict['Angry']
-        fear = emotion_dict['Fear']
-        surprise = emotion_dict['Surprise']
-        st.markdown(f"- Happiness: {round(happinnes,3)}")
-        st.markdown(f"- Sadness: {round(sadness,3)}")
-        st.markdown(f"- Anger: {round(anger,3)}")
-        st.markdown(f"- Fear: {round(fear,3)}")
-        st.markdown(f"- Surprise: {round(surprise,3)}")
+        pass
+        #happinnes =  emotion_dict['Happy']
+        #sadness = emotion_dict['Sad']
+        #anger = emotion_dict['Angry']
+        #fear = emotion_dict['Fear']
+        #surprise = emotion_dict['Surprise']
+        #st.markdown(f"- Happiness: {round(happinnes,3)}")
+        #st.markdown(f"- Sadness: {round(sadness,3)}")
+        #st.markdown(f"- Anger: {round(anger,3)}")
+        #st.markdown(f"- Fear: {round(fear,3)}")
+        #st.markdown(f"- Surprise: {round(surprise,3)}")
     with col2:
         create_pie_chart(emotion_dict)
 
